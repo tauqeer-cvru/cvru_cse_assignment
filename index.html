@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CVRU Vaishali Assignment Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://cvrubihar.ac.in/img/16f5e925a74a199a0822e08139a2e74c') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: inherit;
+      filter: blur(8px);
+      z-index: -1;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+    }
+    h2 { color: #004080; margin-bottom: 15px; }
+    button {
+      background-color: #004080;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .footer { margin-top: 16px; font-size: 12px; color: #333; font-style: italic; }
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .modal-content h3 { color: #004080; margin-bottom: 5px; }
+    .close-btn {
+      background: red; color: white;
+      padding: 5px 12px;
+      float: right;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .subject-header {
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td { border: 1px solid #444; }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      font-size: 12px;
+    }
+    #downloadBtn { margin-top: 20px; background: green; }
+
+    /* --- PDF Fixes --- */
+    .modal-content, table {
+      page-break-inside: avoid;
+    }
+    tr, td, th {
+      page-break-inside: avoid;
+      page-break-after: auto;
+    }
+    .pdf-export {
+      max-height: none !important;
+      overflow: visible !important;
+    }
+    .pdf-hide {
+      display: none !important;
+    }
+
+    ul li{
+      font-size: 12px;
+      text-align: left;
+      padding: 5px 0px;
+      line-height: 1.25;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔹 GUIDELINE PAGE -->
+  <div class="container" id="guidelinePage" style="width: 600px !important;">
+    <img src="cvrulogo.jpg" alt="Logo" style="width: 100%;" />
+    <h2>Assignment Submission Guidelines</h2>
+<ul style="font-size:14px; text-align:left;">
+  <li>Step 1: Download Front Page and fill with your details (Name, Roll No., Subject, etc.)</li>
+  <li>Step 2: Download Index Page and fill all columns after completing your work.</li>
+  <li>Step 3: Click “View Your Questions” → enter Roll No. & Name → download your 10 questions.</li>
+  <li>Step 4: Arrange your assignment in this order:</li>
+  <li>Front Page → Allotted Question List → Index Page → 10 Handwritten Answers </li>
+</ul>
+
+<span style="color: red; text-align: left !important; font-size: 16px; font-weight: 600;">Important Rules</span>
+<ul style="font-size:14px; text-align:left;">
+  <li>Use only white A4 sheets | No overwriting or untidy work | Submit in Cobra File only</li>
+  <li><b style="color:red;">Deadline: 18th December 2025</b></li>
+  <li>Submit your Assignment during class time only and Late submissions = Rejection & 0 Marks</li>
+</ul>
+
+    <div>
+      <button onclick="downloadFile('front_page.docx')" style="border:2px solid #004080; background:#fff; color:#004080;">📥 Front Page</button>
+      <button onclick="downloadFile('index.pdf')" style="border:2px solid #004080; background:#fff; color:#004080;">📥 Index Page</button>
+      <button onclick="openPortal()">🧾 View Your Questions</button>
+    </div>
+    <hr>
+    <div class="footer">Developed & maintained by Department of CSE, CVRU Vaishali.</div>
+  </div>
+
+  <!-- 🔹 MAIN PORTAL PAGE -->
+  <div class="container" id="portalPage" style="display:none;">
+    <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
+    <h2>Assignment Portal</h2>
+
+    <input type="text" id="rollNo" placeholder="Enter Roll Number" required/>
+    <input type="text" id="studentName" placeholder="Enter Student Name" required/>
+    <div><button onclick="checkAssignment()">Check Assignment</button></div>
+    <div id="message" style="margin-top:10px; color:red; font-size:14px;"></div>
+    <hr>
+    <div class="footer">Developed & maintained by Department of CSE, CVRU Vaishali.</div>
+  </div>
+
+  <!-- 🔹 MODAL -->
+  <div id="assignmentModal" class="modal">
+    <div class="modal-content" id="modalContent">
+      <button class="close-btn" onclick="closeModal()">X</button>
+      <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
+      <div class="subject-header">
+        <h3>B-Tech (CSE) - 1st Semester [2025-29]</h3>
+        <p><b>Course Code:</b> 3TBCS 603(A) | <B>Course:</b> Python</p>
+        <h3>Assignment 1</h3>
+      </div>
+      <div id="studentInfo"></div>
+      <h3 style="margin-top:20px;">All Questions</h3>
+      <table id="allQuestionsTable">
+        <thead><tr><th>Q. No.</th><th>Question</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+      <hr>
+      <div class="footer" style="text-align:center;">Developed & maintained by Department of CSE, CVRU Vaishali.</div>
+    </div>
+  </div>
+
+  <!-- LIBRARIES -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+  let assignmentData = [];
+  let questionsData = [];
+
+  function downloadFile(fileName) {
+    const link = document.createElement('a');
+    link.href = fileName;
+    link.download = fileName;
+    link.click();
+  }
+
+  function openPortal() {
+    document.getElementById("guidelinePage").style.display = "none";
+    document.getElementById("portalPage").style.display = "block";
+  }
+
+  async function loadExcelData() {
+    const response = await fetch("students.xlsx");
+    const arrayBuffer = await response.arrayBuffer();
+    const workbook = XLSX.read(new Uint8Array(arrayBuffer), { type: "array" });
+    assignmentData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+    questionsData = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[1]]);
+  }
+
+  async function checkAssignment() {
+    if (assignmentData.length === 0 || questionsData.length === 0) await loadExcelData();
+
+    const rollNo = document.getElementById("rollNo").value.trim();
+    const studentName = document.getElementById("studentName").value.trim().toUpperCase();
+    const message = document.getElementById("message");
+
+    const student = assignmentData.find(
+      s => String(s["Roll No."]).trim() === rollNo &&
+           String(s["Student Name"]).trim().toUpperCase() === studentName
+    );
+
+    if (student) {
+      message.textContent = "";
+      showAssignment(student);
+    } else {
+      message.textContent = "❌ Invalid details! Please try again.";
+      closeModal();
+    }
+  }
+
+  function showAssignment(student) {
+    document.getElementById("studentInfo").innerHTML = `
+      <p><b>Name:</b> ${student["Student Name"]}</p>
+      <p><b>Roll No:</b> ${student["Roll No."]}</p>
+      <p><b>Allotted Questions (Numbers):</b> ${student["All 10 Questions"]}</p>
+    `;
+
+    const tbody = document.querySelector("#allQuestionsTable tbody");
+    tbody.innerHTML = "";
+    questionsData.forEach((row, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${i + 1}</td><td>${row["Questions"] || ""}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    const modal = document.getElementById("assignmentModal");
+    modal.style.display = "flex";
+    window.onclick = e => { if (e.target === modal) closeModal(); };
+  }
+
+  function closeModal() {
+    document.getElementById("assignmentModal").style.display = "none";
+    window.onclick = null;
+  }
+
+  function downloadPDF() {
+    const element = document.getElementById("modalContent");
+    const closeBtn = document.querySelector(".close-btn");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    closeBtn.classList.add("pdf-hide");
+    downloadBtn.classList.add("pdf-hide");
+    element.classList.add("pdf-export");
+
+    const opt = {
+      margin: [0.5, 0.5, 0.5, 0.5],
+      filename: "Python_Assignment_01.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: ["css", "legacy"], avoid: ["tr", "td", "th"] }
+    };
+
+    html2pdf().set(opt).from(element).save().then(() => {
+      closeBtn.classList.remove("pdf-hide");
+      downloadBtn.classList.remove("pdf-hide");
+      element.classList.remove("pdf-export");
+    });
+  }
+</script>
+</body>
+</html>
