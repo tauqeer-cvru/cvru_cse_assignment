@@ -95,7 +95,7 @@
     th, td {
       padding: 8px;
       text-align: left;
-      font-size: 12px;
+      font-size: 14px;
     }
     #downloadBtn { margin-top: 20px; background: green; }
 
@@ -116,10 +116,10 @@
     }
 
     ul li{
-      font-size: 12px;
+      font-size: 14px;
       text-align: left;
       padding: 5px 0px;
-      line-height: 1.25;
+      line-height: 1.5;
     }
   </style>
 </head>
@@ -127,21 +127,31 @@
 
   <!-- 🔹 GUIDELINE PAGE -->
   <div class="container" id="guidelinePage" style="width: 600px !important;">
-    <img src="cvrulogo.jpg" alt="Logo" style="width: 100%;" />
-    <h2>Assignment Submission Guidelines</h2>
+    <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
+    <h2>Diploma (CSE) - 4th Semester [2025-26]</h2>
+    <h3>Assignment Submission Guidelines</h3>
 <ul style="font-size:14px; text-align:left;">
   <li>Step 1: Download Front Page and fill with your details (Name, Roll No., Subject, etc.)</li>
   <li>Step 2: Download Index Page and fill all columns after completing your work.</li>
-  <li>Step 3: Click “View Your Questions” → enter Roll No. & Name → download your 10 questions.</li>
-  <li>Step 4: Arrange your assignment in this order:</li>
-  <li>Front Page → Allotted Question List → Index Page → 10 Handwritten Answers </li>
+  <li>Step 3: Click “View Your Questions” → Enter Roll/Enrollment No. & Name → download your 10 questions.</li>
+  <li>Step 4: Arrange your assignment in this order:
+    <ul style="margin-left:10px; list-style-type: circle;">
+      <li>Front Page</li>
+      <li>Allotted Question List</li>
+      <li>Index Page</li>
+      <li>10 Handwritten Answers</li>
+    </ul>
+  </li>
 </ul>
 
 <span style="color: red; text-align: left !important; font-size: 16px; font-weight: 600;">Important Rules</span>
 <ul style="font-size:14px; text-align:left;">
-  <li>Use only white A4 sheets | No overwriting or untidy work | Submit in Cobra File only</li>
-  <li><b style="color:red;">Deadline: 18th December 2025</b></li>
-  <li>Submit your Assignment during class time only and Late submissions = Rejection & 0 Marks</li>
+  <li>Use only white A4 sheets</li>
+  <li>No overwriting or untidy work</li>
+  <li>Submit in Cobra File only</li>
+  <li><b style="color:red;">Deadline: 10th April 2026</b></li>
+  <li>Submit to your CR during lunch time only</li>
+  <li>Late submissions = Rejection & 0 Marks</li>
 </ul>
 
     <div>
@@ -158,7 +168,7 @@
     <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
     <h2>Assignment Portal</h2>
 
-    <input type="text" id="rollNo" placeholder="Enter Enrollment Number" required/>
+    <input type="text" id="rollNo" placeholder="Enter Roll/Enrollment Number" required/>
     <input type="text" id="studentName" placeholder="Enter Student Name" required/>
     <div><button onclick="checkAssignment()">Check Assignment</button></div>
     <div id="message" style="margin-top:10px; color:red; font-size:14px;"></div>
@@ -172,8 +182,8 @@
       <button class="close-btn" onclick="closeModal()">X</button>
       <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
       <div class="subject-header">
-        <h3>B-Tech (CSE) - 1st Semester [2025-29]</h3>
-        <p><b>Course Code:</b> 3TBCS 603(A) | <B>Course:</b> Python</p>
+        <h3>Diploma (CSE) - 4th Semester [2025-26]</h3>
+        <p><b>Course Code:</b> 2TDCS – 402 | <b>Course:</b> Data Structure</p>
         <h3>Assignment 1</h3>
       </div>
       <div id="studentInfo"></div>
@@ -241,7 +251,7 @@
   function showAssignment(student) {
     document.getElementById("studentInfo").innerHTML = `
       <p><b>Name:</b> ${student["Student Name"]}</p>
-      <p><b>Enrollment No:</b> ${student["Roll No."]}</p>
+      <p><b>Roll No:</b> ${student["Roll No."]}</p>
       <p><b>Allotted Questions (Numbers):</b> ${student["All 10 Questions"]}</p>
     `;
 
@@ -274,7 +284,7 @@
 
     const opt = {
       margin: [0.5, 0.5, 0.5, 0.5],
-      filename: "Python_Assignment_01.pdf",
+      filename: "Assignment.pdf",
       image: { type: "jpeg", quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true },
       jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
