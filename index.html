@@ -128,12 +128,11 @@
   <!-- 🔹 GUIDELINE PAGE -->
   <div class="container" id="guidelinePage" style="width: 600px !important;">
     <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
-    <h2>Diploma (CSE) - 4th Semester [2025-26]</h2>
-    <h3>Assignment Submission Guidelines</h3>
+    <h2>Assignment Submission Guidelines</h2>
 <ul style="font-size:14px; text-align:left;">
   <li>Step 1: Download Front Page and fill with your details (Name, Roll No., Subject, etc.)</li>
   <li>Step 2: Download Index Page and fill all columns after completing your work.</li>
-  <li>Step 3: Click “View Your Questions” → Enter Roll/Enrollment No. & Name → download your 10 questions.</li>
+  <li>Step 3: Click “View Your Questions” → Enter Roll No. & Name → download your 10 questions.</li>
   <li>Step 4: Arrange your assignment in this order:
     <ul style="margin-left:10px; list-style-type: circle;">
       <li>Front Page</li>
@@ -149,8 +148,8 @@
   <li>Use only white A4 sheets</li>
   <li>No overwriting or untidy work</li>
   <li>Submit in Cobra File only</li>
-  <li><b style="color:red;">Deadline: 20th May 2026</b></li>
-  <li>Submit your assignment during DS class time only</li>
+  <li><b style="color:red;">Deadline: 4th November 2026</b></li>
+  <li>Submit to me during your class time only</li>
   <li>Late submissions = Rejection & 0 Marks</li>
 </ul>
 
@@ -168,7 +167,7 @@
     <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
     <h2>Assignment Portal</h2>
 
-    <input type="text" id="rollNo" placeholder="Enter Roll/Enrollment Number" required/>
+    <input type="text" id="rollNo" placeholder="Enter Roll Number" required/>
     <input type="text" id="studentName" placeholder="Enter Student Name" required/>
     <div><button onclick="checkAssignment()">Check Assignment</button></div>
     <div id="message" style="margin-top:10px; color:red; font-size:14px;"></div>
@@ -182,18 +181,19 @@
       <button class="close-btn" onclick="closeModal()">X</button>
       <img src="cvrulogo.jpg" alt="Logo" style="width: 100%; margin-bottom: 15px;" />
       <div class="subject-header">
-        <h3>Diploma (CSE) - 4th Semester [2025-26]</h3>
-        <p><b>Course Code:</b> 2TDCS-402 | <b>Course:</b> Data Structures</p>
-        <h3>Assignment 2</h3>
+        <h3>BCA 3rd + Diploma 5th [2026-27]</h3>
+        <p><b>Course Code:</b> 3IBCA 304 / 2TDCS-502 | <b>Course:</b> JAVA</p>
+        <h3>Assignment 1</h3>
       </div>
       <div id="studentInfo"></div>
+      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
       <h3 style="margin-top:20px;">All Questions</h3>
       <table id="allQuestionsTable">
         <thead><tr><th>Q. No.</th><th>Question</th></tr></thead>
         <tbody></tbody>
       </table>
 
-      <button id="downloadBtn" onclick="downloadPDF()">Download PDF</button>
+      
       <hr>
       <div class="footer" style="text-align:center;">Developed & maintained by Department of CSE, CVRU Vaishali.</div>
     </div>
